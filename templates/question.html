@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How long is 30 seconds? - Question</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var startTime = {{ session['start_time'] }};
+            var currentTime = Math.floor(Date.now() / 1000);
+            var elapsed = currentTime - startTime;
+            var remainingTime = 60 - elapsed;
+
+            if (remainingTime <= 0) {
+                window.location.href = "{{ url_for('end_game') }}";
+            } else {
+                setTimeout(function() {
+                    window.location.href = "{{ url_for('end_game') }}";
+                }, remainingTime * 1000);
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input[type="radio"], label {
+            margin: 10px;
+            font-size: 16px;
+        }
+        button, .stop-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button:hover, .stop-button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+        .stop-button {
+            position: fixed;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FF6347;
+        }
+    </style>
+</head>
+<body>
+    <h1>How long is 30 seconds?</h1>
+    <form action="" method="post">
+        <p>{{ question['question'] }}</p>
+        {% for choice in question['choices'] %}
+        <input type="radio" id="{{ choice }}" name="choice" value="{{ choice }}" required>
+        <label for="{{ choice }}">{{ choice }}</label><br>
+        {% endfor %}
+        <button type="submit">Next</button>
+    </form>
+    <a href="/end_game?stop=true" class="stop-button">Stop the Game</a>
+    <hr>
+    <footer>
+        <p>Your score: {{ score }}</p>
+    </footer>
+</body>
+</html>

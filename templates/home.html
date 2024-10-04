@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How long is 30 seconds? - Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .rules {
+            margin: 20px auto;
+            text-align: left;
+            width: 80%; /* Adjust width as necessary */
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>How long is 30 seconds?</h1>
+    <div class="rules">
+        <h2>Rules of The Game:</h2>
+        <ol>
+            <li>Your goal is to answer as many questions in 30 seconds as you can.</li>
+            <li>Here's the twist: you won't be shown the timer.</li>
+            <li>You will have to stop the game before the timer hits 30 seconds to keep your score.</li>
+            <li>If you stop the game after 30 seconds, your score becomes 0.</li>
+        </ol>
+    </div>
+    {% if 'username' not in session %}
+    <p>Welcome to the Game! Enter your name and click start to begin the game.</p>
+    <form action="" method="post">
+        <input type="text" name="username" required>
+        <button type="submit">Start Game</button>
+    </form>
+    {% else %}
+    <p>Welcome back, {{ session['username'] }}! Click below to start the game.</p>
+    <form action="/question" method="get">
+        <button type="submit">Start Game</button>
+    </form>
+    {% endif %}
+</body>
+</html>
