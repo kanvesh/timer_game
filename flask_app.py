@@ -49,11 +49,13 @@ def end_game():
         session['score'] = 0
     elif 'stop' in request.args and request.args.get('stop') == 'true':
         if elapsed_time < 30:
+            message = "Well done! You stopped before 30 seconds."
             pass  # Keep the score as it is
         else:
             session['score'] = 0
+            message = "Oops, you crossed 30 seconds!"
 
     elapsed_time_display = int(elapsed_time)  # Convert to integer to display seconds
-    return render_template('end_game.html', score=session['score'], elapsed_time=elapsed_time_display)
+    return render_template('end_game.html', score=session['score'], elapsed_time=int(elapsed_time), message=message)
 if __name__ == '__main__':
     app.run(debug=True)

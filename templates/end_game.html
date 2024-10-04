@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How long is 30 seconds? - Game Over</title>
     <style>
         body {
@@ -25,6 +26,7 @@
 <body>
     <h1>How long is 30 seconds?</h1>
     <h2>Game Over</h2>
+    <p>{{ message }}</p>
     <p>Your score is: {{ score }}</p>
     <p>Time elapsed: {{ elapsed_time }} seconds</p>
     <form action="/end_game" method="post">
